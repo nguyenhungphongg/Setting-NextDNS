@@ -2,8 +2,8 @@ import requests
 import os
 
 # Thông tin cấu hình
-NEXTDNS_PROFILE_ID = os.getenv("25be1f")  # ID Profile NextDNS
-API_KEY = os.getenv("c4c33952dbe4347593c86de6392f5c533e394707")  # API Key NextDNS
+NEXTDNS_PROFILE_ID = os.getenv("NEXTDNS_PROFILE_ID")  # ID Profile NextDNS
+API_KEY = os.getenv("NEXTDNS_API_KEY")  # API Key NextDNS
 
 # Danh sách domain cần chặn/mở
 DOMAINS_TO_BLOCK = [
