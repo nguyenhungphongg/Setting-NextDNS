@@ -1,9 +1,9 @@
-name: NextDNS Block Scheduler
+name: NextDNS Toggle Scheduler
 
 on:
   schedule:
-    - cron: "0 9 * * *"  # 16h (4PM) - Bật block (UTC+7)
-    - cron: "0 21 * * *" # 4h sáng (UTC+7) - Tắt block
+    - cron: "0 9 * * *"  # 16h (4PM) - Đảo trạng thái block
+    - cron: "0 21 * * *" # 4h sáng (4AM) - Đảo trạng thái block
   workflow_dispatch:  # Cho phép chạy thủ công
 
 jobs:
@@ -21,9 +21,8 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Manually Block domains
-        if: github.event_name == 'workflow_dispatch'
-        run: python nextdns_toggle.py enable
+      - name: Toggle domain status
+        run: python nextdns_toggle.py
         env:
           NEXTDNS_PROFILE_ID: ${{ secrets.NEXTDNS_PROFILE_ID }}
           NEXTDNS_API_KEY: ${{ secrets.NEXTDNS_API_KEY }}
