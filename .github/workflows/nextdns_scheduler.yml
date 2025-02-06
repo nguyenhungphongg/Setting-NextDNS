@@ -21,16 +21,9 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Block domains at 16h
-        if: github.event.schedule == '0 9 * * *'
+      - name: Manually Block domains
+        if: github.event_name == 'workflow_dispatch'
         run: python nextdns_toggle.py enable
-        env:
-          NEXTDNS_PROFILE_ID: ${{ secrets.NEXTDNS_PROFILE_ID }}
-          NEXTDNS_API_KEY: ${{ secrets.NEXTDNS_API_KEY }}
-
-      - name: Unblock domains at 4h sáng
-        if: github.event.schedule == '0 21 * * *'
-        run: python nextdns_toggle.py disable
         env:
           NEXTDNS_PROFILE_ID: ${{ secrets.NEXTDNS_PROFILE_ID }}
           NEXTDNS_API_KEY: ${{ secrets.NEXTDNS_API_KEY }}
